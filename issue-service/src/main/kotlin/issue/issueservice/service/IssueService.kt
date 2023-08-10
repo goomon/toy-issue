@@ -38,4 +38,20 @@ class IssueService(
         val issue = issueRepository.findByIdOrNull(id) ?: throw NotFoundException("Issue Is Not Found")
         return IssueResponse(issue)
     }
+
+    @Transactional
+    fun edit(userID: Long, id: Long, request: IssueRequest): IssueResponse {
+        val issue = issueRepository.findByIdOrNull(id) ?: throw NotFoundException("Issue Is Not Found")
+
+        return with(issue) {
+            this.userId = userID
+            summary = request.summary
+            description = request.description
+            type = request.type
+            priority = request.priority
+            status = request.status
+
+            IssueResponse(issueRepository.save(this))
+        }
+    }
 }
