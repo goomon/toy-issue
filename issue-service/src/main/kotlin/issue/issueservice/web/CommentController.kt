@@ -24,7 +24,7 @@ class CommentController(
         authUser: AuthUser,
         @PathVariable issueId: Long,
         @RequestBody request: CommentRequest,
-    ) = commentService.create(authUser.userID, issueId, authUser.username, request)
+    ) = commentService.create(authUser.userId, issueId, authUser.username, request)
 
     @PutMapping("/{id}")
     fun edit(
@@ -32,7 +32,7 @@ class CommentController(
         @PathVariable issueId: Long,
         @PathVariable id: Long,
         @RequestBody request: CommentRequest,
-    ) = commentService.edit(id, authUser.userID, request)
+    ) = commentService.edit(id, authUser.userId, request)
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -41,6 +41,6 @@ class CommentController(
         @PathVariable issueId: Long,
         @PathVariable id: Long,
     ) {
-        commentService.delete(issueId, id, authUser.userID)
+        commentService.delete(issueId, id, authUser.userId)
     }
 }

@@ -26,7 +26,7 @@ class IssueController(
     fun create(
         authUser: AuthUser,
         @RequestBody request: IssueRequest,
-    ) = issueService.create(authUser.userID, request)
+    ) = issueService.create(authUser.userId, request)
 
     @GetMapping
     fun getAll(
@@ -45,7 +45,7 @@ class IssueController(
         authUser: AuthUser,
         @PathVariable id: Long,
         @RequestBody request: IssueRequest,
-    ) = issueService.edit(authUser.userID, id, request)
+    ) = issueService.edit(authUser.userId, id, request)
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
