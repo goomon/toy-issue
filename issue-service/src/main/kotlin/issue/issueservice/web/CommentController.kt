@@ -5,12 +5,13 @@ import issue.issueservice.model.CommentRequest
 import issue.issueservice.service.CommentService
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping ("/api/v1/issues/{issueId}/comments")
+@RequestMapping("/api/v1/issues/{issueId}/comments")
 class CommentController(
     private val commentService: CommentService
 ) {
@@ -21,4 +22,12 @@ class CommentController(
         @PathVariable issueId: Long,
         @RequestBody request: CommentRequest,
     ) = commentService.create(authUser.userID, issueId, authUser.username, request)
+
+    @PutMapping("/{id}")
+    fun edit(
+        authUser: AuthUser,
+        @PathVariable issueId: Long,
+        @PathVariable id: Long,
+        @RequestBody request: CommentRequest,
+    ) = commentService.edit(id, authUser.userID, request)
 }
