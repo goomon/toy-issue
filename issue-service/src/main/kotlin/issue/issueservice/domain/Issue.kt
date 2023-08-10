@@ -16,6 +16,9 @@ class Issue(
     @Column
     var userId: Long,
 
+    @OneToMany(mappedBy = "issue")
+    val comments: MutableList<Comment> = mutableListOf(),
+
     @Column
     var summary: String,
 
