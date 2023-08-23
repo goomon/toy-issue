@@ -6,6 +6,8 @@ plugins {
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
 	kotlin("plugin.jpa") version "1.8.22"
+
+	kotlin("kapt") version "1.8.22"
 }
 
 java {
@@ -26,6 +28,8 @@ subprojects {
 	apply(plugin = "kotlin-spring")
 	apply(plugin = "io.spring.dependency-management")
 
+	apply(plugin = "kotlin-kapt")
+
 	dependencies {
 		// JWT authentication
 		implementation("com.auth0:java-jwt:3.19.2")
@@ -40,6 +44,7 @@ subprojects {
 
 		// Postgresql DB
 		runtimeOnly("org.postgresql:postgresql")
+		runtimeOnly("org.postgresql:r2dbc-postgresql")
 
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 	}
