@@ -16,3 +16,7 @@ data class UserNotFoundException(
 data class PasswordNotMatchedException(
     override val message: String = "Password Is Not Matched"
 ) : ServerException(404, message)
+
+data class InvalidJwtTokenException(
+    override val message: String = "Invalid Token"
+) : ServerException(400, message)
